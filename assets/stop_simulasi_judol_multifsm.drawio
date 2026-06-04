@@ -1,0 +1,290 @@
+<mxGraphModel dx="1400" dy="900" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1600" pageHeight="1400" background="none" math="0" shadow="0">
+  <root>
+    <mxCell id="0" />
+    <mxCell id="1" parent="0" />
+
+    <!-- ============ JUDUL ============ -->
+    <mxCell id="title" parent="1" vertex="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontStyle=1;fontSize=20" value="STOP! SIMULASI JERAT JUDOL — MULTI FSM">
+      <mxGeometry x="540" y="20" width="520" height="40" as="geometry" />
+    </mxCell>
+    <mxCell id="legenda" parent="1" vertex="1" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];strokeColor=#999999;fillColor=#F5F5F5;fontSize=11" value="Keterangan:&#10;- Tiap FSM punya singkatan &amp; state bernomor.&#10;- Label panah 'act:' = aksi pemain pemicu transisi.&#10;- Kondisi spt KC==4, SL==3, PJ&gt;=1 = guard antar-FSM.&#10;- Lingkaran garis-dobel = state akhir / ENDING.">
+      <mxGeometry x="40" y="20" width="320" height="90" as="geometry" />
+    </mxCell>
+
+    <!-- ============================================================= -->
+    <!-- FSM 1 : FSM_Hari (HR) - mesin utama / pengatur cerita          -->
+    <!-- ============================================================= -->
+    <mxCell id="hr-label" parent="1" vertex="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];strokeColor=none;fillColor=none;fontStyle=1;fontSize=13" value="FSM_Hari (HR) — mesin utama / pengatur progres cerita">
+      <mxGeometry x="60" y="140" width="380" height="30" as="geometry" />
+    </mxCell>
+
+    <mxCell id="hr-start" parent="1" vertex="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];strokeColor=none;fillColor=none;fontSize=11" value="start">
+      <mxGeometry x="70" y="185" width="40" height="20" as="geometry" />
+    </mxCell>
+
+    <mxCell id="hr0" parent="1" vertex="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=3;fillColor=#d5e8d4;strokeColor=#82b366;" value="0&#10;Hari 0&#10;Harmonis">
+      <mxGeometry x="120" y="180" width="80" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="hr-cabang" parent="1" vertex="1" style="rhombus;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;" value="Ajakan&#10;Yadi?">
+      <mxGeometry x="250" y="185" width="90" height="70" as="geometry" />
+    </mxCell>
+    <mxCell id="hr1" parent="1" vertex="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="1&#10;Main judol&#10;(Hari 6-30)">
+      <mxGeometry x="400" y="180" width="80" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="hr2" parent="1" vertex="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="2&#10;Krisis&#10;(Hari 30+)">
+      <mxGeometry x="540" y="180" width="80" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="hr3" parent="1" vertex="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="3&#10;Hancur&#10;(Hari 103+)">
+      <mxGeometry x="680" y="180" width="80" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="hr4" parent="1" vertex="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;line=double;strokeWidth=4;" value="4&#10;Klimaks&#10;(ENDING)">
+      <mxGeometry x="820" y="180" width="80" height="80" as="geometry" />
+    </mxCell>
+
+    <mxCell id="hr-e-start" parent="1" edge="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" source="hr0" target="hr-cabang" value="">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="hr-e-terima" parent="1" edge="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" source="hr-cabang" target="hr1" value="act: TERIMA">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="hr-e-12" parent="1" edge="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" source="hr1" target="hr2" value="SL&gt;=2 &amp;&amp; KC&gt;=3">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="hr-e-23" parent="1" edge="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" source="hr2" target="hr3" value="PJ&gt;=3 &amp;&amp; KL&gt;=3">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="hr-e-34" parent="1" edge="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" source="hr3" target="hr4" value="PJ==4">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <!-- cabang menolak -> Ending 1 langsung -->
+    <mxCell id="hr-e-tolak" parent="1" edge="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;dashed=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;" source="hr-cabang" target="end1" value="act: TOLAK">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- ============================================================= -->
+    <!-- FSM 2 : FSM_Kecanduan (KC)                                     -->
+    <!-- ============================================================= -->
+    <mxCell id="kc-label" parent="1" vertex="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];strokeColor=none;fillColor=none;fontStyle=1;fontSize=13" value="FSM_Kecanduan (KC) — naik tiap kali act: main_judol">
+      <mxGeometry x="60" y="320" width="360" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="kc-start" parent="1" vertex="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];strokeColor=none;fillColor=none;fontSize=11" value="start">
+      <mxGeometry x="70" y="365" width="40" height="20" as="geometry" />
+    </mxCell>
+
+    <mxCell id="kc0" parent="1" vertex="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=3;" value="0&#10;Iseng">
+      <mxGeometry x="120" y="360" width="80" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="kc1" parent="1" vertex="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="1&#10;Penasaran">
+      <mxGeometry x="260" y="360" width="80" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="kc2" parent="1" vertex="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="2&#10;Kebiasaan">
+      <mxGeometry x="400" y="360" width="80" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="kc3" parent="1" vertex="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="3&#10;Kecanduan">
+      <mxGeometry x="540" y="360" width="80" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="kc4" parent="1" vertex="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=3;fillColor=#f8cecc;strokeColor=#b85450;" value="4&#10;Sakau">
+      <mxGeometry x="680" y="360" width="80" height="80" as="geometry" />
+    </mxCell>
+
+    <mxCell id="kc-e01" parent="1" edge="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" source="kc0" target="kc1" value="act: main_judol">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="kc-e12" parent="1" edge="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" source="kc1" target="kc2" value="act: main_judol">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="kc-e23" parent="1" edge="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" source="kc2" target="kc3" value="act: main_judol">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="kc-e34" parent="1" edge="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" source="kc3" target="kc4" value="act: main_judol">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- ============================================================= -->
+    <!-- FSM 3 : FSM_Saldo (SL)                                         -->
+    <!-- ============================================================= -->
+    <mxCell id="sl-label" parent="1" vertex="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];strokeColor=none;fillColor=none;fontStyle=1;fontSize=13" value="FSM_Saldo (SL) — turun tiap act: main_judol / bayar_tagihan">
+      <mxGeometry x="60" y="500" width="400" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="sl-start" parent="1" vertex="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];strokeColor=none;fillColor=none;fontSize=11" value="start">
+      <mxGeometry x="70" y="545" width="40" height="20" as="geometry" />
+    </mxCell>
+
+    <mxCell id="sl0" parent="1" vertex="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=3;fillColor=#d5e8d4;strokeColor=#82b366;" value="0&#10;Aman&#10;(&gt;2jt)">
+      <mxGeometry x="120" y="540" width="80" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="sl1" parent="1" vertex="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="1&#10;Menipis&#10;(&lt;1jt)">
+      <mxGeometry x="280" y="540" width="80" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="sl2" parent="1" vertex="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#fff2cc;strokeColor=#d6b656;" value="2&#10;Kritis&#10;(&lt;100rb)">
+      <mxGeometry x="440" y="540" width="80" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="sl3" parent="1" vertex="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=3;fillColor=#f8cecc;strokeColor=#b85450;" value="3&#10;Minus /&#10;Berutang">
+      <mxGeometry x="600" y="540" width="80" height="80" as="geometry" />
+    </mxCell>
+
+    <mxCell id="sl-e01" parent="1" edge="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" source="sl0" target="sl1" value="saldo turun">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="sl-e12" parent="1" edge="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" source="sl1" target="sl2" value="saldo turun">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="sl-e23" parent="1" edge="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" source="sl2" target="sl3" value="saldo&lt;=0">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- ============================================================= -->
+    <!-- FSM 4 : FSM_Pinjol (PJ)                                        -->
+    <!-- ============================================================= -->
+    <mxCell id="pj-label" parent="1" vertex="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];strokeColor=none;fillColor=none;fontStyle=1;fontSize=13" value="FSM_Pinjol (PJ) — guard masuk: butuh SL&gt;=2 (saldo kritis)">
+      <mxGeometry x="60" y="680" width="400" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="pj-start" parent="1" vertex="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];strokeColor=none;fillColor=none;fontSize=11" value="start">
+      <mxGeometry x="70" y="725" width="40" height="20" as="geometry" />
+    </mxCell>
+
+    <mxCell id="pj0" parent="1" vertex="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=3;fillColor=#d5e8d4;strokeColor=#82b366;" value="0&#10;Belum&#10;pinjam">
+      <mxGeometry x="120" y="720" width="80" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="pj1" parent="1" vertex="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="1&#10;Pinjam&#10;'Bangke'">
+      <mxGeometry x="280" y="720" width="80" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="pj2" parent="1" vertex="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="2&#10;Gali lubang&#10;'Bank Miskin'">
+      <mxGeometry x="440" y="720" width="80" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="pj3" parent="1" vertex="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#fff2cc;strokeColor=#d6b656;" value="3&#10;Ditagih&#10;rentenir">
+      <mxGeometry x="600" y="720" width="80" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="pj4" parent="1" vertex="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=3;fillColor=#f8cecc;strokeColor=#b85450;" value="4&#10;Diancam&#10;rentenir">
+      <mxGeometry x="760" y="720" width="80" height="80" as="geometry" />
+    </mxCell>
+
+    <mxCell id="pj-e01" parent="1" edge="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" source="pj0" target="pj1" value="act: pinjam &amp; SL&gt;=2">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="pj-e12" parent="1" edge="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" source="pj1" target="pj2" value="act: gali_lubang">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="pj-e23" parent="1" edge="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" source="pj2" target="pj3" value="utang &gt; 100jt">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="pj-e34" parent="1" edge="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" source="pj3" target="pj4" value="telat bayar">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- ============================================================= -->
+    <!-- FSM 5 : FSM_Keluarga (KL)                                      -->
+    <!-- ============================================================= -->
+    <mxCell id="kl-label" parent="1" vertex="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];strokeColor=none;fillColor=none;fontStyle=1;fontSize=13" value="FSM_Keluarga (KL) — memburuk seiring KC &amp; SL">
+      <mxGeometry x="60" y="880" width="360" height="30" as="geometry" />
+    </mxCell>
+    <mxCell id="kl-start" parent="1" vertex="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];strokeColor=none;fillColor=none;fontSize=11" value="start">
+      <mxGeometry x="70" y="925" width="40" height="20" as="geometry" />
+    </mxCell>
+
+    <mxCell id="kl0" parent="1" vertex="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=3;fillColor=#d5e8d4;strokeColor=#82b366;" value="0&#10;Harmonis">
+      <mxGeometry x="120" y="920" width="80" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="kl1" parent="1" vertex="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="1&#10;Curiga">
+      <mxGeometry x="260" y="920" width="80" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="kl2" parent="1" vertex="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;" value="2&#10;Konflik">
+      <mxGeometry x="400" y="920" width="80" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="kl3" parent="1" vertex="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;fillColor=#fff2cc;strokeColor=#d6b656;" value="3&#10;KDRT">
+      <mxGeometry x="540" y="920" width="80" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="kl4a" parent="1" vertex="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=3;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="4a&#10;Nadia&#10;KABUR">
+      <mxGeometry x="700" y="860" width="80" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="kl4b" parent="1" vertex="1" style="ellipse;whiteSpace=wrap;html=1;aspect=fixed;strokeWidth=3;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="4b&#10;Nadia&#10;BERTAHAN">
+      <mxGeometry x="700" y="980" width="80" height="80" as="geometry" />
+    </mxCell>
+
+    <mxCell id="kl-e01" parent="1" edge="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" source="kl0" target="kl1" value="KC&gt;=2">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="kl-e12" parent="1" edge="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" source="kl1" target="kl2" value="ketahuan judol">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="kl-e23" parent="1" edge="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;" source="kl2" target="kl3" value="KC==4 &amp;&amp; act: kekerasan">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="kl-e3-4a" parent="1" edge="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.25;exitDx=0;exitDy=0;" source="kl3" target="kl4a" value="act: KABUR">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="kl-e3-4b" parent="1" edge="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;exitX=1;exitY=0.75;exitDx=0;exitDy=0;" source="kl3" target="kl4b" value="act: BERTAHAN">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+    <!-- ============================================================= -->
+    <!-- BLOK ENDING (guard kombinasi antar-FSM)                        -->
+    <!-- ============================================================= -->
+    <mxCell id="end-label" parent="1" vertex="1" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];strokeColor=none;fillColor=none;fontStyle=1;fontSize=14" value="6 ENDING — dipicu kombinasi guard antar-FSM">
+      <mxGeometry x="1060" y="140" width="380" height="30" as="geometry" />
+    </mxCell>
+
+    <mxCell id="end1" parent="1" vertex="1" style="ellipse;whiteSpace=wrap;html=1;line=double;strokeWidth=4;fillColor=#d5e8d4;strokeColor=#82b366;" value="ENDING 1&#10;HAPPY&#10;(menolak)">
+      <mxGeometry x="1080" y="190" width="110" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="end1-g" parent="1" vertex="1" style="text;html=1;align=left;verticalAlign=middle;strokeColor=#82b366;fillColor=#eafaf1;fontSize=10" value="guard:&#10;KC==0 &amp;&amp; PJ==0">
+      <mxGeometry x="1210" y="200" width="150" height="40" as="geometry" />
+    </mxCell>
+
+    <mxCell id="end2" parent="1" vertex="1" style="ellipse;whiteSpace=wrap;html=1;line=double;strokeWidth=4;fillColor=#d5e8d4;strokeColor=#82b366;" value="ENDING 2&#10;HAPPY&#10;(sadar)">
+      <mxGeometry x="1080" y="300" width="110" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="end2-g" parent="1" vertex="1" style="text;html=1;align=left;verticalAlign=middle;strokeColor=#82b366;fillColor=#eafaf1;fontSize=10" value="guard:&#10;PJ==0 &amp;&amp; KC&gt;=2&#10;&amp;&amp; act: tolak_pinjol&#10;&amp;&amp; act: minta_maaf">
+      <mxGeometry x="1210" y="305" width="170" height="60" as="geometry" />
+    </mxCell>
+
+    <mxCell id="end3" parent="1" vertex="1" style="ellipse;whiteSpace=wrap;html=1;line=double;strokeWidth=4;fillColor=#f8cecc;strokeColor=#b85450;" value="ENDING 3&#10;BAD&#10;(jual ginjal)">
+      <mxGeometry x="1080" y="410" width="110" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="end3-g" parent="1" vertex="1" style="text;html=1;align=left;verticalAlign=middle;strokeColor=#b85450;fillColor=#fdeaea;fontSize=10" value="guard:&#10;PJ==4 &amp;&amp; SL==3&#10;&amp;&amp; act: NEGOSIASI">
+      <mxGeometry x="1210" y="420" width="170" height="50" as="geometry" />
+    </mxCell>
+
+    <mxCell id="end4" parent="1" vertex="1" style="ellipse;whiteSpace=wrap;html=1;line=double;strokeWidth=4;fillColor=#f8cecc;strokeColor=#b85450;" value="ENDING 4&#10;BAD&#10;(bunuh diri)">
+      <mxGeometry x="1080" y="520" width="110" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="end4-g" parent="1" vertex="1" style="text;html=1;align=left;verticalAlign=middle;strokeColor=#b85450;fillColor=#fdeaea;fontSize=10" value="guard:&#10;PJ==4 &amp;&amp; KL==4a&#10;&amp;&amp; act: KABUR">
+      <mxGeometry x="1210" y="530" width="170" height="50" as="geometry" />
+    </mxCell>
+
+    <mxCell id="end5" parent="1" vertex="1" style="ellipse;whiteSpace=wrap;html=1;line=double;strokeWidth=4;fillColor=#dae8fc;strokeColor=#6c8ebf;" value="ENDING 5&#10;(otomatis&#10;stlh E4)">
+      <mxGeometry x="1080" y="630" width="110" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="end5-g" parent="1" vertex="1" style="text;html=1;align=left;verticalAlign=middle;strokeColor=#6c8ebf;fillColor=#eaf0fb;fontSize=10" value="guard:&#10;ending_aktif==4&#10;(auto-lanjut)">
+      <mxGeometry x="1210" y="640" width="170" height="50" as="geometry" />
+    </mxCell>
+
+    <mxCell id="end6" parent="1" vertex="1" style="ellipse;whiteSpace=wrap;html=1;line=double;strokeWidth=4;fillColor=#f8cecc;strokeColor=#b85450;" value="ENDING 6&#10;BAD&#10;(Nadia melawan)">
+      <mxGeometry x="1080" y="740" width="110" height="80" as="geometry" />
+    </mxCell>
+    <mxCell id="end6-g" parent="1" vertex="1" style="text;html=1;align=left;verticalAlign=middle;strokeColor=#b85450;fillColor=#fdeaea;fontSize=10" value="guard:&#10;KL==4b &amp;&amp; KC==4&#10;&amp;&amp; act: jual_keluarga">
+      <mxGeometry x="1210" y="750" width="170" height="50" as="geometry" />
+    </mxCell>
+
+    <!-- panah dari klimaks HR4 menuju blok ending -->
+    <mxCell id="e-hr4-end3" parent="1" edge="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#b85450;" source="hr4" target="end3" value="NEGOSIASI">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="e-hr4-end4" parent="1" edge="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#b85450;" source="hr4" target="end4" value="KABUR">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="e-end4-end5" parent="1" edge="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#6c8ebf;dashed=1;" source="end4" target="end5" value="auto">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="e-kl4a-end4" parent="1" edge="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#6c8ebf;dashed=1;" source="kl4a" target="end4" value="">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="e-kl4b-end6" parent="1" edge="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#b85450;dashed=1;" source="kl4b" target="end6" value="">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+    <mxCell id="e-hr2-end2" parent="1" edge="1" style="edgeStyle=orthogonalEdgeStyle;rounded=0;html=1;strokeColor=#82b366;dashed=1;" source="hr2" target="end2" value="tolak pinjol &amp; sadar">
+      <mxGeometry relative="1" as="geometry" />
+    </mxCell>
+
+  </root>
+</mxGraphModel>

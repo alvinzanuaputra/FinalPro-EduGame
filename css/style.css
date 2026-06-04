@@ -1,0 +1,217 @@
+/* ============================================================
+   STOP! SIMULASI JERAT JUDOL
+   Game edukasi MULTI-FSM (vanilla JS)
+   File CSS — semua tampilan dipindah ke sini (perilaku tidak berubah)
+   ============================================================ */
+:root{
+  --bg:#0d0d10;
+  --panel:rgba(0,0,0,.78);
+  --accent:#ffcf33;
+  --danger:#e0463e;
+  --safe:#4caf78;
+  --warn:#e8a13a;
+  --text:#f4f4f0;
+  --muted:#9a9a9a;
+  --font-display:'Bebas Neue','Arial Narrow',sans-serif;
+  --font-body:'Segoe UI',system-ui,sans-serif;
+}
+@import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap');
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--font-body);
+  display:flex;align-items:center;justify-content:center;
+  overflow:hidden;
+}
+
+/* ====== STAGE ====== */
+#stage{
+  position:relative;
+  width:100%;max-width:900px;
+  aspect-ratio:16/9;
+  background:#1b1b20;
+  overflow:hidden;
+  box-shadow:0 0 60px rgba(0,0,0,.6);
+  user-select:none;
+}
+
+/* ====== LATAR (SLOT GAMBAR) ====== */
+#bg-slot{
+  position:absolute;inset:0;
+  background:#23232b;
+  display:flex;align-items:center;justify-content:center;
+  background-size:cover;background-position:center;
+  transition:background-image .2s;
+}
+#bg-slot .alt-label{
+  color:#555;font-size:14px;letter-spacing:1px;
+  border:1px dashed #444;padding:8px 14px;border-radius:6px;
+  background:rgba(0,0,0,.3);text-align:center;
+}
+
+/* ====== KARAKTER (SLOT GAMBAR) ====== */
+#char-slot{
+  position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  width:42%;height:78%;
+  display:flex;align-items:flex-end;justify-content:center;
+  background-size:contain;background-position:bottom center;background-repeat:no-repeat;
+}
+#char-slot .alt-label{
+  margin-bottom:120px;color:#777;font-size:12px;
+  border:1px dashed #555;padding:6px 10px;border-radius:6px;
+  background:rgba(0,0,0,.35);
+}
+
+/* ====== HUD KIRI ATAS ====== */
+#hud{
+  position:absolute;top:0;left:0;z-index:5;
+  background:var(--panel);
+  padding:14px 18px 16px;
+  border-bottom-right-radius:6px;
+  min-width:270px;
+}
+#hud .saldo{font-size:20px;font-weight:700;letter-spacing:.3px}
+#hud .hari{font-size:12px;color:var(--muted);margin-top:2px}
+#hud .kc-label{font-size:13px;margin-top:10px;margin-bottom:5px}
+#kc-bar{
+  width:240px;height:18px;border:2px solid #fff;background:#000;position:relative;
+}
+#kc-fill{height:100%;width:0;background:var(--accent);transition:width .5s,background .5s}
+
+/* logo pojok kanan */
+#logo{
+  position:absolute;top:14px;right:16px;z-index:5;
+  width:42px;height:42px;border-radius:50%;
+  background:rgba(255,255,255,.12);
+  display:flex;align-items:center;justify-content:center;
+  font-family:var(--font-display);font-size:24px;color:#fff;
+}
+
+/* ====== DIALOG BAWAH ====== */
+#dialog{
+  position:absolute;left:0;right:0;bottom:0;z-index:6;
+  background:linear-gradient(transparent,rgba(0,0,0,.55) 18%,rgba(0,0,0,.82) 40%);
+  padding:26px 30px 22px;cursor:pointer;
+}
+#speaker{font-weight:700;font-size:17px;color:var(--accent);margin-bottom:4px;min-height:20px}
+#line{font-size:18px;line-height:1.45;min-height:52px}
+#hint{position:absolute;right:30px;bottom:14px;font-family:var(--font-display);
+  font-size:22px;color:#fff;letter-spacing:1px;opacity:.85}
+#hint.hidden{display:none}
+
+/* ====== PILIHAN ====== */
+#choices{
+  position:absolute;left:0;right:0;bottom:0;z-index:7;
+  display:none;flex-direction:column;gap:10px;
+  padding:24px 30px;background:rgba(0,0,0,.6);
+}
+#choices button{
+  font-family:var(--font-body);font-size:16px;
+  background:#1c1c22;color:var(--text);border:2px solid #444;
+  padding:13px 18px;border-radius:8px;cursor:pointer;text-align:left;
+  transition:.15s;
+}
+#choices button:hover{border-color:var(--accent);background:#2a2a33;transform:translateX(4px)}
+
+/* ====== SIMULASI HP ====== */
+#phone-overlay{
+  position:absolute;inset:0;z-index:20;display:none;
+  align-items:center;justify-content:center;
+  background:rgba(0,0,0,.65);backdrop-filter:blur(2px);
+}
+#phone{
+  width:300px;height:90%;max-height:560px;
+  background:#000;border-radius:30px;border:6px solid #222;
+  padding:14px;display:flex;flex-direction:column;position:relative;
+  box-shadow:0 20px 60px rgba(0,0,0,.7);
+}
+#phone .notch{width:120px;height:20px;background:#222;border-radius:0 0 14px 14px;
+  margin:0 auto 8px;flex-shrink:0}
+#phone-screen{flex:1;background:#11131a;border-radius:18px;overflow-y:auto;color:#eee;
+  display:flex;flex-direction:column}
+.phone-appbar{padding:12px 14px;font-weight:700;background:#1a73e8;color:#fff;
+  border-radius:18px 18px 0 0;display:flex;align-items:center;gap:8px;font-size:15px}
+.phone-appbar.judol{background:#7b1fa2}
+.phone-appbar.pinjol{background:#c62828}
+.phone-body{padding:14px;flex:1;font-size:14px;line-height:1.5}
+.phone-body h4{margin-bottom:8px;font-size:15px}
+.phone-saldo{background:#1f2330;border-radius:10px;padding:12px;text-align:center;margin-bottom:12px}
+.phone-saldo .v{font-size:22px;font-weight:700;color:var(--accent)}
+.phone-btn{display:block;width:100%;padding:12px;margin-top:10px;border:none;border-radius:10px;
+  font-size:15px;font-weight:600;cursor:pointer;color:#fff;background:#1a73e8;transition:.15s}
+.phone-btn:hover{filter:brightness(1.15)}
+.phone-btn.win{background:#2e7d32}
+.phone-btn.danger{background:#c62828}
+.phone-btn.purple{background:#7b1fa2}
+.phone-msg{padding:9px 12px;border-radius:14px;margin:6px 0;max-width:80%;font-size:13px}
+.phone-msg.them{background:#23262f;align-self:flex-start;border-bottom-left-radius:3px}
+.phone-msg.me{background:#1a73e8;align-self:flex-end;border-bottom-right-radius:3px}
+.phone-chat{display:flex;flex-direction:column;padding:12px}
+.phone-result{text-align:center;padding:18px;font-size:16px;font-weight:700}
+.phone-result.win{color:#66bb6a}
+.phone-result.lose{color:#ef5350}
+.phone-close{position:absolute;top:-2px;right:8px;background:none;border:none;color:#888;
+  font-size:26px;cursor:pointer;z-index:2}
+.ktp-slot,.selfie-slot{border:1px dashed #555;border-radius:8px;padding:18px;text-align:center;
+  color:#888;font-size:12px;margin:8px 0;background:#181b24}
+
+/* ====== LAYAR JUDUL & ENDING ====== */
+.fullscreen{
+  position:absolute;inset:0;z-index:30;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  text-align:center;padding:40px;
+  background:radial-gradient(circle at 50% 30%,#1c1c28,#08080c);
+}
+.fullscreen h1{font-family:var(--font-display);font-size:78px;letter-spacing:3px;line-height:.9}
+.fullscreen h1 .stop{color:var(--danger)}
+.fullscreen .sub{color:var(--muted);margin-top:6px;letter-spacing:4px;font-size:14px;text-transform:uppercase}
+.fullscreen .warn{margin-top:26px;max-width:520px;font-size:13px;color:#bbb;
+  border:1px solid #333;padding:14px 18px;border-radius:8px;background:rgba(0,0,0,.3)}
+.fullscreen button{
+  margin-top:30px;font-family:var(--font-display);font-size:26px;letter-spacing:2px;
+  padding:12px 46px;border:2px solid var(--accent);background:transparent;color:var(--accent);
+  border-radius:8px;cursor:pointer;transition:.18s}
+.fullscreen button:hover{background:var(--accent);color:#000}
+.ending-badge{font-family:var(--font-display);font-size:20px;letter-spacing:3px;
+  padding:6px 20px;border-radius:30px;margin-bottom:14px}
+.ending-badge.happy{background:var(--safe);color:#04230f}
+.ending-badge.bad{background:var(--danger);color:#fff}
+.ending-badge.epilog{background:#5b7fb5;color:#fff}
+.ending-title{font-family:var(--font-display);font-size:54px;line-height:1;margin-bottom:18px}
+.ending-msg{max-width:560px;font-size:17px;line-height:1.55;color:#e8e8e8}
+.ending-msg em{color:var(--accent);font-style:normal;font-weight:600}
+.tips{text-align:left;max-width:540px;margin-top:20px;font-size:14px;color:#cfcfcf;
+  background:rgba(0,0,0,.35);border-left:3px solid var(--safe);padding:14px 18px;border-radius:6px}
+.tips b{color:var(--safe)}
+
+/* ====== PANEL DEBUG FSM ====== */
+#fsm-debug{
+  position:absolute;top:0;right:0;z-index:40;
+  background:rgba(5,8,14,.93);border:1px solid #2a3340;border-radius:0 0 0 10px;
+  padding:12px 14px;font-family:'Consolas',monospace;font-size:11px;color:#9fe6c0;
+  min-width:215px;
+}
+#fsm-debug h5{color:var(--accent);margin-bottom:8px;font-size:11px;letter-spacing:1px;
+  font-family:var(--font-body)}
+#fsm-debug .row{display:flex;justify-content:space-between;padding:2px 0;border-bottom:1px dotted #1d2530}
+#fsm-debug .row span:first-child{color:#7a8aa0}
+#fsm-debug .row span:last-child{color:#9fe6c0;font-weight:700}
+.tool-btn{position:absolute;z-index:41;background:#181b24;color:#8a93a3;border:1px solid #333;
+  font-size:11px;padding:5px 9px;border-radius:6px;cursor:pointer}
+#toggle-debug{top:8px;right:235px}
+#toggle-debug.collapsed{right:8px}
+#skip-menu-btn{bottom:8px;left:8px}
+#skip-menu{position:absolute;bottom:40px;left:8px;z-index:42;display:none;
+  background:rgba(5,8,14,.96);border:1px solid #333;border-radius:8px;padding:8px;flex-direction:column;gap:5px}
+#skip-menu button{font-size:12px;background:#1c1c22;color:#ccc;border:1px solid #3a3a44;
+  padding:7px 10px;border-radius:5px;cursor:pointer;text-align:left}
+#skip-menu button:hover{border-color:var(--accent)}
+
+@media(max-width:600px){
+  .fullscreen h1{font-size:52px}
+  #hud{min-width:200px;padding:10px}
+  #kc-bar{width:160px}
+  #phone{width:88%}
+}

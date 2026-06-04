@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STOP! — Simulasi Jerat Judol</title>
+<!-- Semua CSS dipindah ke css/style.css (tidak ada perubahan tampilan) -->
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<div id="stage">
+
+  <!-- ====== LATAR : SLOT GAMBAR ====== -->
+  <!-- Gambar dimuat otomatis dari assets/images/backgrounds/ (lihat js/render.js).
+       Kalau file belum ada, label "[ ALT: namafile ]" tetap tampil sbg fallback. -->
+  <div id="bg-slot"><div class="alt-label" id="bg-alt">[ ALT: latar_ruang_tamu.jpg ]</div></div>
+
+  <!-- ====== KARAKTER : SLOT GAMBAR ====== -->
+  <!-- Gambar dimuat otomatis dari assets/images/characters/ (lihat js/render.js). -->
+  <div id="char-slot"><div class="alt-label" id="char-alt"></div></div>
+
+  <!-- ====== HUD ====== -->
+  <div id="hud">
+    <div class="saldo">Tabungan: <span id="saldo">Rp 3.000.000</span></div>
+    <div class="hari" id="hari">Hari ke-0</div>
+    <div class="kc-label">Level Kecanduan: <span id="kc-name" style="color:var(--muted)"></span></div>
+    <div id="kc-bar"><div id="kc-fill"></div></div>
+  </div>
+  <div id="logo">D</div>
+
+  <!-- ====== DIALOG ====== -->
+  <div id="dialog">
+    <div id="speaker"></div>
+    <div id="line"></div>
+    <div id="hint">Space &gt;&gt;</div>
+  </div>
+
+  <!-- ====== PILIHAN ====== -->
+  <div id="choices"></div>
+
+  <!-- ====== HP OVERLAY ====== -->
+  <div id="phone-overlay">
+    <div id="phone">
+      <button class="phone-close" onclick="closePhone()">&times;</button>
+      <div class="notch"></div>
+      <div id="phone-screen"></div>
+    </div>
+  </div>
+
+  <!-- ====== ALAT DEMO ====== -->
+  <button id="toggle-debug" class="tool-btn" onclick="toggleDebug()">FSM ▸</button>
+  <div id="fsm-debug">
+    <h5>PANEL DEBUG — MULTI FSM</h5>
+    <div class="row"><span>HR Hari</span><span id="d-hr">0</span></div>
+    <div class="row"><span>KC Kecanduan</span><span id="d-kc">0 Iseng</span></div>
+    <div class="row"><span>SL Saldo</span><span id="d-sl">0 Aman</span></div>
+    <div class="row"><span>PJ Pinjol</span><span id="d-pj">0 Belum</span></div>
+    <div class="row"><span>KL Keluarga</span><span id="d-kl">0 Harmonis</span></div>
+    <div class="row"><span>utang</span><span id="d-utang">Rp 0</span></div>
+  </div>
+
+  <button id="skip-menu-btn" class="tool-btn" onclick="toggleSkip()">⏭ Demo Ending</button>
+  <div id="skip-menu">
+    <button onclick="jumpEnding(1)">Ending 1 — Happy (menolak)</button>
+    <button onclick="jumpEnding(2)">Ending 2 — Happy (sadar)</button>
+    <button onclick="jumpEnding(3)">Ending 3 — Jual ginjal</button>
+    <button onclick="jumpEnding(4)">Ending 4 — Akhir tragis</button>
+    <button onclick="jumpEnding(5)">Ending 5 — Epilog keluarga</button>
+    <button onclick="jumpEnding(6)">Ending 6 — Nadia melawan</button>
+  </div>
+
+  <!-- ====== LAYAR JUDUL ====== -->
+  <div id="title-screen" class="fullscreen">
+    <h1><span class="stop">STOP!</span></h1>
+    <div class="sub">Simulasi Jerat Judol &amp; Pinjol</div>
+    <div class="warn">
+      ⚠ Game ini mengandung tema sensitif: perjudian, KDRT, dan kekerasan.
+      Dibuat sebagai media edukasi tentang bahaya judi online. Bijaklah menonton.
+    </div>
+    <button onclick="startGame()">MULAI</button>
+    <div style="margin-top:18px;font-size:12px;color:#555">
+      Recreate edukatif dari "Pikabuu: STOP!" — proyek tugas Multi-FSM
+    </div>
+  </div>
+
+</div>
+
+<!-- Semua JS dipisah ke folder js/ memakai ES Modules.
+     Cukup muat main.js sbg entry point; ia meng-import module lain
+     dengan urutan: fsm & render -> dialog/scenes/endings/phone -> tools. -->
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
