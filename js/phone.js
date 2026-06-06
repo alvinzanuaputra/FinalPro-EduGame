@@ -25,8 +25,8 @@ export function phoneRegisterPinjol(appName, cls, after){
     <div class="phone-body">
       <h4>Registrasi Pinjaman</h4>
       <p style="color:#aaa;font-size:13px">Lengkapi data untuk mencairkan dana instan.</p>
-      <div class="ktp-slot">[ ALT: foto_ktp_benny.png ]<br>📷 Foto KTP</div>
-      <div class="selfie-slot">[ ALT: selfie_ktp_benny.png ]<br>🤳 Selfie memegang KTP</div>
+      <div class="ktp-slot" style="padding:4px"><img src="assets/images/phone/ktp.png" style="width:100%;border-radius:4px"><br>📷 Foto KTP</div>
+      <div class="selfie-slot" style="padding:4px"><img src="assets/images/phone/selfie_ktp.png" style="width:100%;border-radius:4px"><br>🤳 Selfie memegang KTP</div>
       <button class="phone-btn danger" onclick="closePhone()">Ajukan Pinjaman →</button>
     </div>`);
 }

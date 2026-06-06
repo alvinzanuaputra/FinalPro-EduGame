@@ -45,8 +45,8 @@ export const IMG_BASE = {
 };
 export function imgPath(category, file){ return IMG_BASE[category] + file; }
 
-/* Pasang gambar ke sebuah slot, dgn fallback label "[ ALT: ... ]". */
-function applySlot(slotId, labelId, category, file){
+/* Pasang gambar ke sebuah slot tunggal (untuk background) */
+function applySlotSingle(slotId, labelId, category, file){
   const slot  = $(slotId);
   const label = $(labelId);
   if(!file){
@@ -55,11 +55,8 @@ function applySlot(slotId, labelId, category, file){
     slot.style.backgroundImage = '';
     return;
   }
-  // Default: tampilkan label sbg fallback (perilaku asli kalau gambar belum ada)
   label.textContent = '[ ALT: '+file+' ]';
   label.style.display = 'block';
-  // Coba muat gambar dari folder yang benar. Kalau ada -> tampilkan,
-  // kalau gagal (onerror) -> biarkan label "[ ALT: ... ]" tetap tampil.
   const url = imgPath(category, file);
   const probe = new Image();
   probe.onload  = ()=>{ slot.style.backgroundImage = "url('"+url+"')"; label.style.display='none'; };
@@ -67,9 +64,36 @@ function applySlot(slotId, labelId, category, file){
   probe.src = url;
 }
 
-/* gant latar & karakter (SLOT GAMBAR) -------------------------- */
+/* Pasang gambar ke node DOM tertentu (untuk multiple characters) */
+function applySlotNode(slotNode, labelNode, category, file){
+  labelNode.textContent = '[ ALT: '+file+' ]';
+  labelNode.style.display = 'block';
+  const url = imgPath(category, file);
+  const probe = new Image();
+  probe.onload  = ()=>{ slotNode.style.backgroundImage = "url('"+url+"')"; labelNode.style.display='none'; };
+  probe.onerror = ()=>{ slotNode.style.backgroundImage = ''; labelNode.style.display='block'; };
+  probe.src = url;
+}
+
+/* ganti latar & karakter (SLOT GAMBAR) -------------------------- */
 /* ALT = petunjuk nama file gambar yang harus kamu cari/buat.    */
+/* charAlt dapat berupa string dipisahkan koma untuk multi karakter */
 export function setScene(bgAlt, charAlt){
-  applySlot('bg-slot',  'bg-alt',  'background', bgAlt);
-  applySlot('char-slot','char-alt','character',  charAlt);
+  applySlotSingle('bg-slot', 'bg-alt', 'background', bgAlt);
+  
+  const charContainer = $('char-container');
+  charContainer.innerHTML = ''; // bersihkan karakter sebelumnya
+  
+  if(!charAlt) return;
+  
+  const chars = charAlt.split(',').map(s=>s.trim()).filter(Boolean);
+  chars.forEach((c) => {
+    const slot = document.createElement('div');
+    slot.className = 'char-slot';
+    const label = document.createElement('div');
+    label.className = 'alt-label';
+    slot.appendChild(label);
+    charContainer.appendChild(slot);
+    applySlotNode(slot, label, 'character', c);
+  });
 }

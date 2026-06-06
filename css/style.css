@@ -52,13 +52,22 @@ body{
 }
 
 /* ====== KARAKTER (SLOT GAMBAR) ====== */
-#char-slot{
-  position:absolute;bottom:0;left:50%;transform:translateX(-50%);
-  width:42%;height:78%;
+#char-container{
+  position:absolute;bottom:0;left:0;right:0;height:78%;
+  display:flex;align-items:flex-end;justify-content:center;
+  gap: 20px; pointer-events:none;
+}
+.char-slot{
+  width:35%;height:100%;
   display:flex;align-items:flex-end;justify-content:center;
   background-size:contain;background-position:bottom center;background-repeat:no-repeat;
+  transition: transform 0.2s, filter 0.2s;
 }
-#char-slot .alt-label{
+.char-slot.inactive{
+  filter: brightness(0.6);
+  transform: scale(0.95);
+}
+.char-slot .alt-label{
   margin-bottom:120px;color:#777;font-size:12px;
   border:1px dashed #555;padding:6px 10px;border-radius:6px;
   background:rgba(0,0,0,.35);
