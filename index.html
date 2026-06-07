@@ -11,12 +11,22 @@
 <div id="stage">
 
   <!-- ====== LATAR : SLOT GAMBAR ====== -->
-  <!-- Gambar dimuat otomatis dari assets/images/backgrounds/ (lihat js/render.js).
+  <!-- Gambar dimuat otomatis dari assets/images/backgrounds/ (lihat js/render.js?v=3).
        Kalau file belum ada, label "[ ALT: namafile ]" tetap tampil sbg fallback. -->
-  <div id="bg-slot"><div class="alt-label" id="bg-alt">[ ALT: latar_ruang_tamu.jpg ]</div></div>
+  <div id="bg-slot"><div class="alt-label" id="bg-alt">[ ALT: latar_ruang_tamu.png ]</div></div>
+
+  <!-- ====== INTERACTIVE LAYER ====== -->
+  <div id="interactive-layer" style="display:none;">
+    <div id="hitbox-tv" class="hitbox" title="Ganti Channel TV">📺</div>
+    <div id="hitbox-kopi" class="hitbox" title="Minum Kopi">☕</div>
+    <div id="hitbox-pisang" class="hitbox" title="Makan Pisang Goreng">
+      <img src="assets/images/characters/pisang_goreng.png" id="img-pisang" alt="pisang">
+    </div>
+    <div id="hitbox-hp" class="hitbox" title="Buka HP">📱</div>
+  </div>
 
   <!-- ====== KARAKTER : CONTAINER MULTI SLOT ====== -->
-  <!-- Gambar dimuat otomatis dari assets/images/characters/ (lihat js/render.js). -->
+  <!-- Gambar dimuat otomatis dari assets/images/characters/ (lihat js/render.js?v=3). -->
   <div id="char-container"></div>
 
   <!-- ====== HUD ====== -->
@@ -86,8 +96,8 @@
 </div>
 
 <!-- Semua JS dipisah ke folder js/ memakai ES Modules.
-     Cukup muat main.js sbg entry point; ia meng-import module lain
+     Cukup muat main.js?v=3 sbg entry point; ia meng-import module lain
      dengan urutan: fsm & render -> dialog/scenes/endings/phone -> tools. -->
-<script type="module" src="js/main.js"></script>
+<script type="module" src="js/main.js?v=3"></script>
 </body>
 </html>

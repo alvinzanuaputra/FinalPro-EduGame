@@ -3,7 +3,7 @@
    ENDINGS, TIPS, dan showEnding(). Dipindah apa adanya.
    ================================================================= */
 
-import { $ } from './render.js';
+import { $ } from './render.js?v=3';
 
 export const ENDINGS={
  1:{type:'happy',badge:'ENDING 1 / 6 — HAPPY',title:'Berhenti Sebelum Mulai',

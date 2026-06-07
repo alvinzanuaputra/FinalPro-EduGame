@@ -4,12 +4,12 @@
    toggleDebug, toggleSkip, jumpEnding dipanggil dari atribut
    onclick="" di index.html. Karena ES module ber-scope lokal,
    ketiganya DIEKSPOS ke window di bawah agar atribut onclick
-   tetap menemukannya (lihat catatan yang sama di js/phone.js).
+   tetap menemukannya (lihat catatan yang sama di js/phone.js?v=3).
    ================================================================= */
 
-import { $, render } from './render.js';
-import { FSM, setSaldo, setPJ, setKL, setHari } from './fsm.js';
-import { showEnding } from './endings.js';
+import { $, render } from './render.js?v=3';
+import { FSM, setSaldo, setPJ, setKL, setHari } from './fsm.js?v=3';
+import { showEnding } from './endings.js?v=3';
 
 export function toggleDebug(){
   const p=$('fsm-debug'),b=$('toggle-debug');

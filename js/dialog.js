@@ -8,9 +8,9 @@
    - {t:'ending', n}                       picu ending
    ================================================================= */
 
-import { $, setScene } from './render.js';
-import { SCENES } from './scenes.js';
-import { showEnding } from './endings.js';
+import { $, setScene } from './render.js?v=3';
+import { SCENES } from './scenes.js?v=3';
+import { showEnding } from './endings.js?v=3';
 
 let current=[], idx=0, busy=false;
 
@@ -25,11 +25,19 @@ export function handle(step){
   hideChoices();
   if(step.bg!==undefined||step.char!==undefined) setScene(step.bg||$('bg-alt')._cur, step.char);
   switch(step.t){
-    case 'say':
+    case 'say': 
       if(step.bg) { $('bg-alt').textContent='[ ALT: '+step.bg+' ]'; $('bg-alt')._cur=step.bg; }
       if('char' in step) setScene(step.bg||($('bg-alt')._cur||''), step.char);
       showDialog(step.who||'', step.text); break;
-    case 'fx': step.run(); next(); break;
+    case 'fx': 
+      const prev = current;
+      step.run();
+      if(current === prev) next();
+      break;
+    case 'call': 
+      document.getElementById('dialog').style.display='none';
+      step.run(); 
+      break;
     case 'choice': showChoices(step); break;
     case 'goto': play(step.scene); break;
     case 'ending': showEnding(step.n); break;

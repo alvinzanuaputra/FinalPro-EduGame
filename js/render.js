@@ -3,7 +3,7 @@
    Berisi: helper $, rupiah, render(), dan setScene() (slot gambar).
    ================================================================= */
 
-import { FSM } from './fsm.js';
+import { FSM } from './fsm.js?v=3';
 
 export const $=id=>document.getElementById(id);
 export function rupiah(n){ return 'Rp '+n.toLocaleString('id-ID'); }
@@ -33,7 +33,7 @@ export function render(){
    gambarmu di folder berikut (lihat assets/README_ASSETS.md):
      - background -> assets/images/backgrounds/<file>
      - character  -> assets/images/characters/<file>
-     - phone      -> assets/images/phone/<file>   (dipakai di js/phone.js)
+     - phone      -> assets/images/phone/<file>   (dipakai di js/phone.js?v=3)
    Jika gambar BELUM ADA / gagal dimuat, otomatis fallback ke
    label "[ ALT: namafile ]" supaya game tetap jalan walau folder
    gambar masih kosong (lihat onerror di applySlot()).
@@ -90,6 +90,7 @@ export function setScene(bgAlt, charAlt){
   chars.forEach((c) => {
     const slot = document.createElement('div');
     slot.className = 'char-slot';
+    if(c === 'pisang_goreng.png') slot.classList.add('item-slot');
     const label = document.createElement('div');
     label.className = 'alt-label';
     slot.appendChild(label);
