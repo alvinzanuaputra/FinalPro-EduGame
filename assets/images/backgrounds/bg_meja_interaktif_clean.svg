@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="wood" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#5c3a21" />
+      <stop offset="100%" stop-color="#3e2312" />
+    </linearGradient>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#2a2a35" />
+      <stop offset="100%" stop-color="#15151a" />
+    </linearGradient>
+  </defs>
+  <!-- Room Background -->
+  <rect width="1280" height="720" fill="url(#bg)" />
+  
+  <!-- Table -->
+  <rect x="100" y="300" width="1080" height="420" rx="20" fill="url(#wood)" />
+  
+  <!-- Table edge highlight -->
+  <rect x="100" y="300" width="1080" height="15" fill="#754b2c" rx="5" />
+  
+  <!-- Wood lines for texture -->
+  <path d="M 150 350 L 1130 350 M 120 450 L 1160 450 M 140 550 L 1140 550 M 110 650 L 1170 650" stroke="#351e0f" stroke-width="2" fill="none" opacity="0.5" />
+</svg>

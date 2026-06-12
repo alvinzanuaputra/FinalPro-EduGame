@@ -28,6 +28,8 @@ export function handle(step){
     case 'say': 
       if(step.bg) { $('bg-alt').textContent='[ ALT: '+step.bg+' ]'; $('bg-alt')._cur=step.bg; }
       if('char' in step) setScene(step.bg||($('bg-alt')._cur||''), step.char);
+      if(step.bgm) { import('./audio.js').then(a => { a.stopAllSounds(); a.loopSound(step.bgm); }); }
+      if(step.sound) { import('./audio.js').then(a => a.playSound(step.sound)); }
       showDialog(step.who||'', step.text); break;
     case 'fx': 
       const prev = current;
@@ -49,6 +51,7 @@ export function showDialog(who,text){
   $('speaker').textContent=who;
   $('line').textContent=text;
   $('hint').classList.remove('hidden');
+  import('./audio.js').then(a => a.playSound('text_bip'));
 }
 export function showChoices(step){
   $('hint').classList.add('hidden');
@@ -57,7 +60,13 @@ export function showChoices(step){
   step.opts.forEach(o=>{
     const b=document.createElement('button');
     b.textContent='▸ '+o.label;
-    b.onclick=(e)=>{ e.stopPropagation(); hideChoices(); o.go(); };
+    b.onmouseenter=()=>import('./audio.js').then(a=>a.playSound('UI_select'));
+    b.onclick=(e)=>{ 
+      e.stopPropagation(); 
+      import('./audio.js').then(a => a.playSound('UI_click_soft'));
+      hideChoices(); 
+      o.go(); 
+    };
     box.appendChild(b);
   });
 }

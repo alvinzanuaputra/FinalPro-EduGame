@@ -12,9 +12,11 @@
 
 import { $, rupiah } from './render.js?v=3';
 import { FSM, setSaldo, naikKC, tambahUtang } from './fsm.js?v=3';
+import { playSound, stopSound } from './audio.js';
 
 export function openPhone(html){ $('phone-screen').innerHTML=html; $('phone-overlay').style.display='flex'; }
 export function closePhone(){ 
+  playSound('UI_click_soft');
   $('phone-overlay').style.display='none'; 
   const phoneEl = document.getElementById('phone');
   if(phoneEl) phoneEl.classList.remove('judol-active');
@@ -25,6 +27,7 @@ let _afterPhone=null;
 /* layar registrasi pinjol */
 export function phoneRegisterPinjol(appName, cls, after){
   _afterPhone=after;
+  playSound('Whoosh_transition');
   openPhone(`
     <div class="phone-appbar ${cls}">📱 ${appName}</div>
     <div class="phone-body">
@@ -38,6 +41,7 @@ export function phoneRegisterPinjol(appName, cls, after){
 
 export function phoneNotification(title, message, after) {
   _afterPhone = after;
+  playSound('Notification');
   openPhone(`
     <div class="phone-appbar notif">💬 Notifikasi</div>
     <div class="phone-body" style="display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;">
@@ -56,6 +60,7 @@ let currentMultiplier = 1;
 
 export function phoneJudol(after){
   _afterPhone=after;
+  playSound('Whoosh_transition');
   const phoneEl = document.getElementById('phone');
   if(phoneEl) phoneEl.classList.add('judol-active');
   
@@ -126,20 +131,24 @@ export function phoneJudol(after){
 }
 
 export function openBetPopup() {
+  playSound('UI_click_soft');
   document.getElementById('bet-popup').classList.add('show');
 }
 
 export function closeBetPopup() {
+  playSound('UI_click_soft');
   document.getElementById('bet-popup').classList.remove('show');
 }
 
 export function selectBet(amount) {
+  playSound('UI_click_soft');
   currentBet = amount;
   document.getElementById('judol-bet-display').textContent = rupiah(amount);
   closeBetPopup();
 }
 
 export function selectMultiplier(val) {
+  playSound('UI_click_soft');
   currentMultiplier = val;
   updateMultiplierUI();
 }
@@ -151,9 +160,11 @@ function updateMultiplierUI() {
 }
 
 export function judolTopup() {
+  playSound('UI_click_soft');
   // Simulasi topup pinjol instan untuk edukasi lingkaran setan judol-pinjol
   const confirmTopup = confirm("Saldo kurang? Mau top-up instan Rp 1.000.000 dari Pinjol Bang-Keen? (Bunga 5% per hari!)");
   if(confirmTopup) {
+    playSound('Digital_transaction');
     tambahUtang(1000000);
     setSaldo(FSM.SL.uang + 1000000);
     document.getElementById('judol-bal').textContent = rupiah(FSM.SL.uang);
@@ -164,6 +175,7 @@ export function judolTopup() {
 }
 
 export function spin(){
+  playSound('UI_click_soft');
   if (currentBet === 0) {
     document.getElementById('spin-res').className='phone-result lose'; 
     document.getElementById('spin-res').textContent='Pilih nominal taruhan dulu!';
@@ -304,6 +316,7 @@ function doSpinRun(spinsLeft, betAmount, totalPrize) {
     
     // Mulai animasi putaran ke bawah
     setTimeout(() => {
+      playSound('Slot_spin');
       strip1.style.transition = 'transform 2s cubic-bezier(0.1, 0.7, 0.1, 1)';
       strip2.style.transition = 'transform 2.5s cubic-bezier(0.1, 0.7, 0.1, 1)';
       strip3.style.transition = 'transform 3s cubic-bezier(0.1, 0.7, 0.1, 1)';
@@ -316,11 +329,14 @@ function doSpinRun(spinsLeft, betAmount, totalPrize) {
       // Tunggu reel terlama (3 detik) berhenti
       setTimeout(() => {
         if (win) {
+          if (multiplierWin >= 5) playSound('Jackpot'); else playSound('Coin_reward');
           const hadiah = betAmount * multiplierWin;
           totalPrize += hadiah;
           setSaldo(FSM.SL.uang + hadiah);
           document.getElementById('spin-prize').textContent = rupiah(totalPrize);
           document.getElementById('spin-bal').textContent = rupiah(FSM.SL.uang);
+        } else {
+          playSound('Lose');
         }
         naikKC();
         
@@ -340,6 +356,7 @@ export function backToMenu() {
 /* chat dgn Yadi */
 export function phoneChatYadi(after){
   _afterPhone=after;
+  playSound('Notification');
   openPhone(`
     <div class="phone-appbar">💬 Yadi Harmoko</div>
     <div class="phone-chat">

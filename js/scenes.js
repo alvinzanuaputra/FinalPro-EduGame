@@ -33,9 +33,9 @@ export const SCENES = {
 
   /* ---------- PROLOG ---------- */
   prolog: [
-    { t: 'say', who: '', text: '— HARI KE-0 —', bg: 'bg_meja_interaktif.png', char: '' },
+    { t: 'say', who: '', text: '— HARI KE-0 —', bg: 'latar_ruang_tamu.png', char: '', bgm: 'sunday_Morning1', sound: 'Whoosh_transition' },
     { t: 'fx', run: () => { setHari(0); setSaldo(3000000); } },
-    { t: 'say', who: '', text: 'Benny bersantai menonton bola sambil merokok. Hidup keluarganya tenang dan harmonis.', char: 'benny_neutral.png' },
+    { t: 'say', who: '', text: 'Benny bersantai menonton bola sambil merokok. Hidup keluarganya tenang dan harmonis.', char: 'benny_neutral.png', sound: 'Crowd_cheer' },
     { t: 'say', who: 'Nadia', text: 'Mas, ini pisang gorengnya 😊', char: 'nadia_happy.png, pisang_goreng.png, benny_neutral.png' },
     { t: 'say', who: 'Saya (Benny)', text: 'Wah, istriku makin cantik aja kalau bikin pisang goreng.', char: 'benny_happy.png, nadia_happy.png' },
     { t: 'say', who: 'Nadia', text: 'Ih, gombal. Mas, minta uang belanja dong buat ke pasar.', char: 'nadia_happy.png, benny_happy.png' },
@@ -68,7 +68,7 @@ export const SCENES = {
 
   /* ---------- ENDING 1 (TOLAK) ---------- */
   ending1: [
-    { t: 'say', who: 'Saya (Benny)', text: 'Yad, mending lu berhenti sekarang sebelum terlambat. Kaya cara instan itu mustahil.', char: 'benny_neutral.png, yadi.png' },
+    { t: 'say', who: 'Saya (Benny)', text: 'Yad, mending lu berhenti sekarang sebelum terlambat. Kaya cara instan itu mustahil.', char: 'benny_neutral.png, yadi.png', bgm: 'Resolution' },
     { t: 'say', who: 'Yadi', text: 'Hehe iya juga ya... gua cuma iseng kok Ben.', char: 'yadi.png, benny_neutral.png' },
     { t: 'say', who: 'Saya (Benny)', text: 'Iseng itu awal dari segalanya. Yuk malam ini kita ngopi, gua temenin lu berhenti.', char: 'benny_happy.png, yadi.png' },
     { t: 'ending', n: 1 },
@@ -82,10 +82,10 @@ export const SCENES = {
     { t: 'fx', run: () => { import('./main.js?v=3').then(m => m.enterInteractiveMode()); } },
   ],
   terima2: [
-    { t: 'say', who: '', text: 'Menang-kalah silih berganti. Tanpa sadar, level kecanduan Benny terus naik. Hari demi hari habis untuk judol.', char: 'benny_sad.png' },
+    { t: 'say', who: '', text: 'Menang-kalah silih berganti. Tanpa sadar, level kecanduan Benny terus naik. Hari demi hari habis untuk judol.', char: 'benny_sad.png', bgm: 'sunday_Morning2' },
     { t: 'fx', run: () => { setHari(6); setSaldo(1000000); if (FSM.KC.s < 2) FSM.KC.s = 2; render(); } },
-    { t: 'say', who: '', text: '— HARI KE-6 — Tabungan tinggal Rp 1.000.000.', bg: 'latar_ruang_tamu.png', char: 'benny_sad.png' },
-    { t: 'say', who: 'Nadia', text: 'Mas, jangan lupa bayar kontrakan ya, 1,2 juta. Sudah mau jatuh tempo.', char: 'nadia_neutral.png, benny_sad.png' },
+    { t: 'say', who: '', text: '— HARI KE-6 — Tabungan tinggal Rp 1.000.000.', bg: 'latar_ruang_tamu.png', char: 'benny_sad.png', sound: 'Whoosh_transition' },
+    { t: 'say', who: 'Nadia', text: 'Mas, jangan lupa bayar kontrakan ya, 1,2 juta. Sudah mau jatuh tempo.', char: 'nadia_neutral.png, benny_sad.png', sound: 'Warning_buzzer' },
     { t: 'say', who: 'Saya (Benny)', text: '(Mati aku... uangnya gak cukup.) I-iya nanti aku bayar.', char: 'benny_sad.png, nadia_neutral.png' },
     { t: 'say', who: 'Nadia', text: 'Ini uang belanjanya dikurangin ya mas? Yawes deh...', char: 'nadia_sad.png, benny_sad.png' },
     { t: 'say', who: '', text: 'Benny kesal memikirkan uang. Daripada pusing, ia kembali menatap meja, berniat main lagi.', char: 'benny_angry.png' },
@@ -93,7 +93,7 @@ export const SCENES = {
   ],
   terima3: [
     { t: 'fx', run: () => { setHari(10); setSaldo(460000); if (FSM.KC.s < 3) FSM.KC.s = 3; render(); } },
-    { t: 'say', who: '', text: '— HARI KE-10 — Tabungan tinggal Rp 460.000.', char: 'benny_sad.png' },
+    { t: 'say', who: '', text: '— HARI KE-10 — Tabungan tinggal Rp 460.000.', char: 'benny_sad.png', bgm: 'Tense_BGM', sound: 'Whoosh_transition' },
     {
       t: 'call', run: () => {
         import('./phone.js?v=3').then(p => p.phoneNotification('BCA Mobile', 'Transfer Masuk: Rp 4.000.000<br><small>Keterangan: Gaji Bulan Ini</small>', () => {
@@ -109,10 +109,10 @@ export const SCENES = {
     { t: 'say', who: 'Saya (Benny)', text: 'Bawel! Sudah sana belajar.', char: 'benny_angry.png, kayla_smp.png' },
     { t: 'fx', run: () => { setKL(1); } }, // keluarga: curiga/retak
     { t: 'say', who: '', text: 'Kayla pergi tanpa pamit. Tak lama Nadia menagih soal kontrakan — dan tahu Benny berbohong belum membayar.', char: 'nadia_angry.png, benny_sad.png' },
-    { t: 'say', who: 'Nadia', text: 'Mas bohong? Pak Heru bilang belum dibayar sama sekali!', char: 'nadia_angry.png, benny_sad.png' },
+    { t: 'say', who: 'Nadia', text: 'Mas bohong? Pak Heru bilang belum dibayar sama sekali!', char: 'nadia_angry.png, benny_sad.png', sound: 'dramatic_hit' },
     { t: 'say', who: 'Saya (Benny)', text: 'Berisik! Bawel banget sih jadi orang.', char: 'benny_angry.png, nadia_sad.png' },
     { t: 'fx', run: () => { setHari(17); setSaldo(35000); FSM.KC.s = 4; render(); } },
-    { t: 'say', who: '', text: '— HARI KE-17 — Dari 4,2 juta kini tinggal Rp 35.000. Belum tengah bulan.', char: 'benny_sad.png' },
+    { t: 'say', who: '', text: '— HARI KE-17 — Dari 4,2 juta kini tinggal Rp 35.000. Belum tengah bulan.', char: 'benny_sad.png', sound: 'Whoosh_transition' },
     { t: 'say', who: 'Saya (Benny)', text: 'Gila, sisa 35 ribu doang. Gimana ini... pinjam Yadi aja deh.', char: 'benny_sad.png' },
     { t: 'say', who: 'Yadi', text: 'Waduh Ben, gua juga lagi bokek, baru kalah banyak. Tapi... lu pinjol aja gimana? Cair instan!', char: 'yadi.png, benny_sad.png' },
     {
@@ -131,7 +131,7 @@ export const SCENES = {
     { t: 'say', who: 'Nadia', text: 'Mas... aku sebenarnya sudah lama tahu kamu main judol. Aku diam karena kamu jadi gampang marah.', char: 'nadia_sad.png, benny_sad.png' },
     { t: 'say', who: 'Nadia', text: 'Dulu kamu sabar, bertanggung jawab, sayang keluarga. Berhenti ya mas, belum terlambat.', char: 'nadia_neutral.png, benny_sad.png' },
     { t: 'say', who: 'Saya (Benny)', text: '...Maaf, Nad. Bukannya tambah kaya, judi malah bikin kita makin miskin. Aku janji berhenti.', char: 'benny_sad.png, nadia_neutral.png' },
-    { t: 'say', who: 'Nadia', text: 'Kita cari jalan keluar bareng-bareng. Pasti bisa.', char: 'nadia_happy.png, benny_happy.png' },
+    { t: 'say', who: 'Nadia', text: 'Kita cari jalan keluar bareng-bareng. Pasti bisa.', char: 'nadia_happy.png, benny_happy.png', bgm: 'Resolution' },
     { t: 'ending', n: 2 },
   ],
 
@@ -157,9 +157,9 @@ export const SCENES = {
     { t: 'say', who: 'Saya (Benny)', text: 'Oh ini Pak, saya bayar sekarang.', char: 'benny_happy.png, pakheru.png' },
     { t: 'fx', run: () => { setSaldo(Math.max(0, FSM.SL.uang - 1200000)); } },
     { t: 'say', who: 'Nadia', text: 'Mas, kok bisa sampai telat bayar kontrakan? Uang kita ke mana?', char: 'nadia_angry.png, benny_sad.png' },
-    { t: 'say', who: 'Saya (Benny)', text: 'BERISIK! Urusan laki-laki jangan ikut campur!', char: 'benny_angry.png, nadia_sad.png' },
+    { t: 'say', who: 'Saya (Benny)', text: 'BERISIK! Urusan laki-laki jangan ikut campur!', char: 'benny_angry.png, nadia_sad.png', sound: 'dramatic_hit' },
     { t: 'fx', run: () => { setKL(2); setHari(20); setSaldo(250000); } },
-    { t: 'say', who: '', text: '— HARI KE-20 — Tabungan tinggal Rp 250.000. Kalah terus.', char: 'benny_sad.png' },
+    { t: 'say', who: '', text: '— HARI KE-20 — Tabungan tinggal Rp 250.000. Kalah terus.', char: 'benny_sad.png', sound: 'Whoosh_transition' },
     { t: 'say', who: 'Saya (Benny)', text: 'Nyesel gua... bukan nyesel main judi. Nyesel kenapa tadi bayar kontrakan!', char: 'benny_angry.png' },
     { t: 'say', who: '', text: 'Benny coba pinjam lagi di Bangke — ditolak karena belum lunas. "Mati satu tumbuh seribu," pikirnya, lalu mendaftar pinjol lain.', char: 'benny_sad.png' },
     { t: 'call', run: () => { import('./phone.js?v=3').then(p => p.phoneRegisterPinjol('Bank Miskin - Pinjol', 'pinjol', () => { import('./dialog.js?v=3').then(d => d.play('jalurPinjol4')); })); } },
@@ -167,7 +167,7 @@ export const SCENES = {
   jalurPinjol4: [
     { t: 'fx', run: () => { setPJ(2); tambahUtang(5000000); setSaldo(FSM.SL.uang + 3000000); } },
     { t: 'fx', run: () => { setHari(23); } },
-    { t: 'say', who: '', text: '— HARI KE-23 — Telepon dari "Melarat Finance": cicilan motor menunggak, denda Rp 670.000.', char: 'benny_sad.png' },
+    { t: 'say', who: '', text: '— HARI KE-23 — Telepon dari "Melarat Finance": cicilan motor menunggak, denda Rp 670.000.', char: 'benny_sad.png', sound: 'warning_notif' },
     { t: 'say', who: 'Saya (Benny)', text: 'Nanti-nanti aja. Mau main dulu.', char: 'benny_neutral.png' },
     { t: 'say', who: 'Kayla', text: 'Ayah, ini pisang goreng. Kayla mau nonton TV ya...', char: 'kayla_rumah_revisi.png, pisang_goreng.png, benny_neutral.png' },
     { t: 'say', who: 'Saya (Benny)', text: 'Hari gini nonton TV?! Sana belajar!', char: 'benny_angry.png, kayla_rumah_revisi.png' },
@@ -177,7 +177,7 @@ export const SCENES = {
   ],
   jalur_30: [
     { t: 'fx', run: () => { setHari(30); setKL(2); } },
-    { t: 'say', who: '', text: '— HARI KE-30 — Saldo nyaris habis lagi. Nadia sedang keluar. Pikiran jahat muncul: uang simpanan istri.', char: 'benny_neutral.png' },
+    { t: 'say', who: '', text: '— HARI KE-30 — Saldo nyaris habis lagi. Nadia sedang keluar. Pikiran jahat muncul: uang simpanan istri.', char: 'benny_neutral.png', sound: 'Whoosh_transition' },
     { t: 'say', who: 'Saya (Benny)', text: '(Ketemu... cuma Rp 133.000? Yah, Nadia emang bukan orang kaya.)', char: 'benny_happy.png' },
     { t: 'fx', run: () => { setSaldo(FSM.SL.uang + 133000); } },
     { t: 'say', who: 'Kayla', text: 'Ayah, minta uang jajan...', char: 'kayla_smp.png, benny_neutral.png' },
@@ -186,14 +186,14 @@ export const SCENES = {
     { t: 'say', who: 'Saya (Benny)', text: 'Itu buat bayar sekolah! Bawel banget sih kamu!', char: 'benny_angry.png, kayla_smp.png' },
     { t: 'say', who: '', text: 'Kayla menangis. Saat Nadia pulang dan menanyakan uang simpanannya yang hilang, Benny menyangkal — lalu tersudut.', char: 'nadia_angry.png, benny_sad.png' },
     { t: 'say', who: 'Nadia', text: 'Itu dana darurat kita mas! Kenapa kamu ambil?!', char: 'nadia_angry.png, benny_sad.png' },
-    { t: 'say', who: 'Saya (Benny)', text: 'HORMATI suamimu! (PLAK!)', char: 'benny_angry.png, nadia_sad.png' },
+    { t: 'say', who: 'Saya (Benny)', text: 'HORMATI suamimu! (PLAK!)', char: 'benny_angry.png, nadia_sad.png', sound: 'dramatic_hit' },
     { t: 'fx', run: () => { setKL(3); } }, // KDRT
     { t: 'say', who: '', text: 'Benny menampar Nadia. Sejak hari itu, kekerasan semakin sering terjadi.', char: 'benny_angry.png, nadia_sad.png' },
     { t: 'fx', run: () => { setHari(30); import('./main.js?v=3').then(m => m.enterInteractiveMode()); } },
   ],
   jalur_103: [
     { t: 'fx', run: () => { setHari(103); setPJ(3); } },
-    { t: 'say', who: '', text: '— HARI KE-103 — Wajah Nadia babak belur. Sambil menangis, ia bertanya pada dirinya sendiri...', char: 'nadia_sad.png' },
+    { t: 'say', who: '', text: '— HARI KE-103 — Wajah Nadia babak belur. Sambil menangis, ia bertanya pada dirinya sendiri...', char: 'nadia_sad.png', sound: 'Whoosh_transition' },
     {
       t: 'choice', q: 'Nadia harus memutuskan: bertahan atau kabur?', opts: [
         { label: 'KABUR — pergi bersama Kayla', go: () => play('jalurKabur') },
@@ -205,15 +205,15 @@ export const SCENES = {
   /* ---------- JALUR KABUR -> klimaks rentenir (ending 3/4) ---------- */
   jalurKabur: [
     { t: 'fx', run: () => { setKL(4); } }, // Nadia kabur
-    { t: 'say', who: '', text: 'Nadia mengemas koper dan pergi bersama Kayla, meminjam ongkos dari tetangga, Bu Fera.', char: 'nadia_sad.png' },
+    { t: 'say', who: '', text: 'Nadia mengemas koper dan pergi bersama Kayla, meminjam ongkos dari tetangga, Bu Fera.', char: 'nadia_sad.png', bgm: 'Tense_BGM' },
     { t: 'fx', run: () => { setHari(113); tambahUtang(115000000); setSaldo(0); } },
     { t: 'say', who: '', text: 'Malam hari, Benny pulang ke rumah gelap. Utang sudah Rp 127 juta. Nadia & Kayla hilang. Dapur kosong.', bg: 'latar_rumah_gelap.png', char: 'benny_sad.png' },
-    { t: 'say', who: 'Rentenir', text: '(TELEPON) Bayar utangmu SEKARANG! Gua tahu di mana keluargamu, jangan macam-macam!', char: 'rentenir.png, benny_sad.png' },
+    { t: 'say', who: 'Rentenir', text: '(TELEPON) Bayar utangmu SEKARANG! Gua tahu di mana keluargamu, jangan macam-macam!', char: 'rentenir.png, benny_sad.png', sound: 'Warning_buzzer' },
     { t: 'say', who: 'Saya (Benny)', text: 'I-iya pak, maaf... besok saya lunasi.', char: 'benny_sad.png' },
     { t: 'fx', run: () => { setHari(114); setSaldo(2000); } },
-    { t: 'say', who: '', text: '— HARI KE-114 — Perabotan dijual semua. Sisa Rp 2.000. Benny dipecat seminggu lalu karena ketahuan mencuri. KTP-nya sudah di-blacklist.', char: 'benny_sad.png' },
+    { t: 'say', who: '', text: '— HARI KE-114 — Perabotan dijual semua. Sisa Rp 2.000. Benny dipecat seminggu lalu karena ketahuan mencuri. KTP-nya sudah di-blacklist.', char: 'benny_sad.png', sound: 'Whoosh_transition' },
     { t: 'say', who: '', text: 'Ia coba tarik saldo judol Rp 1 juta — tapi error. Situs tiba-tiba hilang. Benny menangis. Air galon habis, keran mati; ia terpaksa minum dari air toilet.', char: 'benny_sad.png' },
-    { t: 'say', who: '', text: 'Keluar dari toilet, Benny menyadari sang rentenir sudah ada di dalam rumahnya.', char: 'benny_sad.png, rentenir.png' },
+    { t: 'say', who: '', text: 'Keluar dari toilet, Benny menyadari sang rentenir sudah ada di dalam rumahnya.', char: 'benny_sad.png, rentenir.png', sound: 'dramatic_hit' },
     { t: 'say', who: 'Rentenir', text: 'Mau lari ke mana lagi? Utangmu segunung. Pilih: kita nego, atau lu kabur?', char: 'rentenir.png, benny_sad.png' },
     {
       t: 'choice', q: 'Benny menghadapi rentenir:', opts: [
@@ -230,7 +230,7 @@ export const SCENES = {
     { t: 'say', who: '', text: 'Setelah tanda tangan, ia memakai kostum pasien. Tubuhnya dibius total. Kedua ginjalnya diambil dokter ilegal — karena Benny sendiri telah menandatangani persetujuannya.', char: 'benny_sad.png' },
     { t: 'say', who: '', text: 'Kedua ginjal disimpan di kotak es bertuliskan "217". Benny adalah korban ke-217.', char: 'benny_sad.png' },
     { t: 'fx', run: () => { setHari(119); tambahUtang(135000000 - FSM.PJ.utang); } },
-    { t: 'say', who: '', text: '— HARI KE-119 — Benny sekarat, kesakitan tanpa henti di perutnya. Utang tak terhapus penuh: masih sisa Rp 135 juta.', char: 'benny_sad.png' },
+    { t: 'say', who: '', text: '— HARI KE-119 — Benny sekarat, kesakitan tanpa henti di perutnya. Utang tak terhapus penuh: masih sisa Rp 135 juta.', char: 'benny_sad.png', sound: 'Whoosh_transition' },
     { t: 'say', who: 'Saya (Benny)', text: '(Menulis di dinding) Nadia... Kayla... maafkan ayah...', char: 'benny_sad.png' },
     { t: 'ending', n: 3 },
   ],
@@ -249,19 +249,19 @@ export const SCENES = {
     },
   ],
   ending4final: [
-    { t: 'say', who: '', text: 'Pada akhirnya, Benny membaringkan tubuhnya di rel kereta — mengakhiri hidupnya yang terasa tak berarti.', bg: 'railway.png', char: '' },
+    { t: 'say', who: '', text: 'Pada akhirnya, Benny membaringkan tubuhnya di rel kereta — mengakhiri hidupnya yang terasa tak berarti.', bg: 'railway.png', char: '', sound: 'dramatic_hit' },
     { t: 'ending', n: 4 },
   ],
 
   /* ---------- JALUR BERTAHAN -> ending 6 ---------- */
   jalurBertahan: [
     { t: 'fx', run: () => { setKL(5); } }, // Nadia bertahan
-    { t: 'say', who: '', text: 'Meski menyakitkan, Nadia memilih bertahan demi keluarga.', char: 'nadia_sad.png' },
+    { t: 'say', who: '', text: 'Meski menyakitkan, Nadia memilih bertahan demi keluarga.', char: 'nadia_sad.png', bgm: 'Tense_BGM' },
     { t: 'fx', run: () => { setHari(118); } },
-    { t: 'say', who: '', text: '— HARI KE-118 — Benny pulang berantakan, baru dipecat karena ketahuan mencuri. Tak ada makanan di dapur.', bg: 'latar_rumah_gelap.png', char: 'benny_sad.png' },
-    { t: 'say', who: 'Saya (Benny)', text: 'KENAPA GAK ADA MAKANAN?! (memukul Nadia berulang kali)', char: 'benny_angry.png, nadia_sad.png' },
+    { t: 'say', who: '', text: '— HARI KE-118 — Benny pulang berantakan, baru dipecat karena ketahuan mencuri. Tak ada makanan di dapur.', bg: 'latar_rumah_gelap.png', char: 'benny_sad.png', sound: 'Whoosh_transition' },
+    { t: 'say', who: 'Saya (Benny)', text: 'KENAPA GAK ADA MAKANAN?! (memukul Nadia berulang kali)', char: 'benny_angry.png, nadia_sad.png', sound: 'dramatic_hit' },
     { t: 'fx', run: () => { setHari(132); } },
-    { t: 'say', who: '', text: '— HARI KE-132 — TV sudah dijual, uangnya habis lagi untuk judol. Benny memikirkan cara dapat modal... lalu mendapat "ide".', char: 'benny_sad.png' },
+    { t: 'say', who: '', text: '— HARI KE-132 — TV sudah dijual, uangnya habis lagi untuk judol. Benny memikirkan cara dapat modal... lalu mendapat "ide".', char: 'benny_sad.png', sound: 'Whoosh_transition' },
     { t: 'fx', run: () => { setHari(134); } },
     { t: 'say', who: 'Saya (Benny)', text: 'Nad, sebentar lagi ada pria datang. Tugas kamu... layani dia.', char: 'benny_neutral.png, nadia_sad.png' },
     { t: 'say', who: 'Nadia', text: 'A-apa maksud kamu?! Kamu... menjualku?!', char: 'nadia_angry.png, benny_neutral.png' },
@@ -269,7 +269,7 @@ export const SCENES = {
     { t: 'say', who: '', text: 'Lalu datang pria kedua — mencari Kayla. Mengetahui Benny juga menjual putrinya, kemarahan Nadia berubah jadi tekad.', char: 'nadia_angry.png' },
     { t: 'say', who: 'Nadia', text: 'AKU HARUS SELAMATKAN KAYLA!', char: 'nadia_angry.png' },
     { t: 'say', who: '', text: 'Benny menghalangi, mendorongnya tiap kali Nadia melawan. Tak ada pilihan lain — Nadia meraih pisau dapur.', char: 'nadia_angry.png, benny_angry.png' },
-    { t: 'say', who: '', text: 'Nadia menikam Benny hingga tewas. Dengan pisau berlumur darah, ia mendobrak pintu kamar Kayla.', char: 'nadia_angry.png' },
+    { t: 'say', who: '', text: 'Nadia menikam Benny hingga tewas. Dengan pisau berlumur darah, ia mendobrak pintu kamar Kayla.', char: 'nadia_angry.png', sound: 'dramatic_hit' },
     { t: 'say', who: 'Pria', text: '(ketakutan) S-saya belum apa-apakan anak itu! Ampun!', char: 'rentenir.png, nadia_angry.png' },
     {
       t: 'choice', q: 'Nadia dengan pisau di tangan:', opts: [
@@ -279,7 +279,7 @@ export const SCENES = {
     },
   ],
   ending6flashback: [
-    { t: 'say', who: '', text: 'Nadia memeluk Kayla yang menangis keras.', char: 'nadia_sad.png, kayla_rumah_revisi.png' },
+    { t: 'say', who: '', text: 'Nadia memeluk Kayla yang menangis keras.', char: 'nadia_sad.png, kayla_rumah_revisi.png', sound: 'Whoosh_transition', bgm: 'sunday_Morning2' },
     { t: 'say', who: '', text: '— HARI KE −1 — Sehari sebelum Benny kecanduan judol.', bg: 'latar_ruang_tamu.png', char: 'benny_happy.png, nadia_happy.png' },
     { t: 'say', who: 'Saya (Benny)', text: 'Pinter anak ayah. Ayo kita belajar lagi ya, nak.', char: 'benny_happy.png, kayla_rumah_revisi.png' },
     { t: 'say', who: 'Nadia', text: 'Makan dulu yuk semuanya, sudah ibu siapkan 😊', char: 'nadia_happy.png, benny_happy.png' },
