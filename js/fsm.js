@@ -8,7 +8,7 @@
    Tidak ada perubahan logika.
    ================================================================= */
 
-import { render } from './render.js';
+import { render } from './render.js?v=3';
 
 export const FSM = {
   // --- FSM_Hari : mesin utama pengatur progres cerita ---

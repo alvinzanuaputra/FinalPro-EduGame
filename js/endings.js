@@ -3,7 +3,7 @@
    ENDINGS, TIPS, dan showEnding(). Dipindah apa adanya.
    ================================================================= */
 
-import { $ } from './render.js';
+import { $ } from './render.js?v=3';
 
 export const ENDINGS={
  1:{type:'happy',badge:'ENDING 1 / 6 — HAPPY',title:'Berhenti Sebelum Mulai',
@@ -39,12 +39,29 @@ export function showEnding(n){
     ${e.tips?`<div class="tips">${TIPS}</div>`:''}
     <button id="next-end-btn"></button>`;
   $('stage').appendChild(div);
+  import('./audio.js').then(a => {
+    a.stopAllSounds();
+    if ([1, 2].includes(n)) {
+      a.loopSound('Happy_ending');
+    } else {
+      a.playSound('Whoosh_transition');
+      a.loopSound('Sad_ending');
+    }
+  });
   const btn=div.querySelector('#next-end-btn');
+  btn.onmouseenter = () => import('./audio.js').then(a => a.playSound('UI_select'));
   if(n===4){ // ending 4 otomatis lanjut ke ending 5
     btn.textContent='LANJUT →';
-    btn.onclick=()=>{div.remove();showEnding(5);};
+    btn.onclick=()=>{
+      import('./audio.js').then(a => a.playSound('UI_click_soft'));
+      div.remove();
+      showEnding(5);
+    };
   }else{
     btn.textContent='MAIN LAGI';
-    btn.onclick=()=>location.reload();
+    btn.onclick=()=>{
+      import('./audio.js').then(a => a.playSound('UI_click_soft'));
+      location.reload();
+    };
   }
 }

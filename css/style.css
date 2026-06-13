@@ -51,14 +51,67 @@ body{
   background:rgba(0,0,0,.3);text-align:center;
 }
 
+/* ====== INTERACTIVE LAYER ====== */
+#interactive-layer{
+  position:absolute;inset:0;z-index:4;
+}
+.interactive-obj {
+  position: absolute;
+  pointer-events: none;
+}
+#img-tv { top: -10%; left: 50%; transform: translate(-50%, 0); width: 320px; height: auto; filter:drop-shadow(0 10px 15px rgba(0,0,0,0.8)); }
+
+.hitbox {
+  position:absolute;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  transition:transform 0.2s, filter 0.2s;
+}
+.hitbox:hover {
+  transform:scale(1.05);
+  filter: brightness(1.2);
+}
+.obj-img { width:100%; height:100%; object-fit:contain; filter:drop-shadow(0 5px 8px rgba(0,0,0,0.6)); }
+
+#hitbox-remote { top: 55%; left: 25%; transform:translate(-50%,0); width:100px; height:220px; cursor: pointer; }
+#hitbox-pisang { top: 55%; left: 42%; transform:translate(-50%,0); width:250px; height:180px; cursor: pointer; }
+#hitbox-kopi { top: 55%; left: 58%; transform:translate(-50%,0); width:150px; height:150px; cursor: pointer; }
+#hitbox-hp { top: 55%; left: 75%; transform:translate(-50%,0); width:150px; height:230px; cursor: pointer; }
+
+@keyframes liftUpFade {
+  0% { transform: translateY(0) scale(1); opacity: 1; }
+  100% { transform: translateY(-50px) scale(1.1); opacity: 0; }
+}
+.anim-lift {
+  animation: liftUpFade 0.6s ease-out forwards;
+}
+
 /* ====== KARAKTER (SLOT GAMBAR) ====== */
-#char-slot{
-  position:absolute;bottom:0;left:50%;transform:translateX(-50%);
-  width:42%;height:78%;
+#char-container{
+  position:absolute;bottom:0;left:0;right:0;height:78%;
+  display:flex;align-items:flex-end;justify-content:center;
+  gap: 20px; pointer-events:none;
+}
+.char-slot{
+  width:35%;height:100%;
   display:flex;align-items:flex-end;justify-content:center;
   background-size:contain;background-position:bottom center;background-repeat:no-repeat;
+  transition: transform 0.2s, filter 0.2s;
 }
-#char-slot .alt-label{
+.char-slot.item-slot{
+  position:absolute;
+  width:200px;height:120px;
+  bottom:30px;left:50%;
+  transform:translateX(-50%);
+  z-index:20;
+}
+.char-slot.inactive{
+  filter: brightness(0.6);
+  transform: scale(0.95);
+}
+.char-slot .alt-label{
   margin-bottom:120px;color:#777;font-size:12px;
   border:1px dashed #555;padding:6px 10px;border-radius:6px;
   background:rgba(0,0,0,.35);
@@ -208,6 +261,316 @@ body{
 #skip-menu button{font-size:12px;background:#1c1c22;color:#ccc;border:1px solid #3a3a44;
   padding:7px 10px;border-radius:5px;cursor:pointer;text-align:left}
 #skip-menu button:hover{border-color:var(--accent)}
+
+/* ====== JUDOL REALISTIC UI ====== */
+.judol-bg {
+  background: radial-gradient(circle at 50% 50%, #2b005c 0%, #120024 100%);
+  position: relative;
+  padding: 0;
+  color: white;
+  min-height: 100%;
+}
+.judol-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  background: rgba(0,0,0,0.4);
+}
+.judol-title {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.judol-coin-icon {
+  font-size: 30px;
+}
+.judol-title-text h3 {
+  margin: 0;
+  font-size: 20px;
+  letter-spacing: 2px;
+  white-space: nowrap;
+}
+.judol-title-text p {
+  margin: 0;
+  font-size: 12px;
+  color: #ccc;
+}
+.judol-topup {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-size: 10px;
+  cursor: pointer;
+  background: rgba(255,255,255,0.1);
+  padding: 5px 10px;
+  border-radius: 8px;
+}
+.judol-topup-icon {
+  font-size: 20px;
+}
+.judol-balance-label {
+  text-align: center;
+  font-size: 14px;
+  margin-top: 20px;
+}
+.judol-balance-box {
+  margin: 5px auto 20px;
+  width: 70%;
+  background: linear-gradient(180deg, #4caf50, #1b5e20);
+  border: 2px solid #81c784;
+  text-align: center;
+  padding: 10px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5);
+  clip-path: polygon(10% 0, 90% 0, 100% 50%, 90% 100%, 10% 100%, 0 50%);
+}
+.judol-balance-value {
+  font-size: 18px;
+  font-weight: bold;
+}
+.judol-bet-section {
+  padding: 0 20px;
+}
+.judol-bet-label {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+.judol-bet-input-box {
+  display: flex;
+  align-items: center;
+  background: #fff;
+  color: #000;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+.judol-bet-input-box span {
+  flex: 1;
+  text-align: right;
+  font-weight: bold;
+}
+.judol-spins-section {
+  padding: 0 20px;
+  margin-top: 15px;
+}
+.judol-spins-buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 10px;
+  justify-content: center;
+}
+.spin-multiplier {
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 5px rgba(0,0,0,0.4);
+  transition: transform 0.1s;
+}
+.spin-multiplier:hover, .spin-multiplier.active {
+  transform: scale(1.1);
+  box-shadow: 0 0 10px #fff;
+}
+.spin-m-3 { background: #1976d2; }
+.spin-m-5 { background: #f57c00; }
+.spin-m-7 { background: #388e3c; }
+
+.judol-actions {
+  margin-top: 30px;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.judol-btn {
+  padding: 15px;
+  border: none;
+  border-radius: 8px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  box-shadow: inset 0 -4px 0 rgba(0,0,0,0.3);
+  text-transform: uppercase;
+  transition: filter 0.1s;
+}
+.judol-btn:active {
+  box-shadow: inset 0 0 0 rgba(0,0,0,0);
+  transform: translateY(4px);
+}
+.judol-btn-play {
+  background: #03a9f4;
+  color: #000;
+}
+.judol-btn-back {
+  background: #e53935;
+  color: #fff;
+}
+
+/* Pop-up Bet Selection */
+.bet-popup-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 85%;
+  background: #6a1b9a;
+  border: 4px solid #ba68c8;
+  border-radius: 15px;
+  padding: 20px;
+  display: none;
+  z-index: 100;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.8);
+}
+.bet-popup-container.show {
+  display: block;
+  animation: popIn 0.2s ease-out;
+}
+@keyframes popIn {
+  0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+  100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+.bet-popup-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+.bet-popup-title {
+  font-weight: bold;
+  font-size: 18px;
+}
+.bet-option {
+  background: #ab47bc;
+  border: 2px solid #e1bee7;
+  color: white;
+  padding: 12px;
+  margin-bottom: 10px;
+  text-align: center;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  font-size: 16px;
+  transition: background 0.1s;
+}
+.bet-option:hover {
+  background: #ce93d8;
+  color: #000;
+}
+.bet-popup-close {
+  position: absolute;
+  bottom: -15px;
+  right: -15px;
+  background: #fff;
+  color: #6a1b9a;
+  border-radius: 50%;
+  width: 35px;
+  height: 35px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 20px;
+  cursor: pointer;
+  border: 3px solid #6a1b9a;
+}
+
+/* ====== LAYAR SPIN SLOT ====== */
+.spin-screen-bg {
+  background: linear-gradient(180deg, #2a004f 0%, #a00b55 50%, #d84800 100%);
+  position: relative;
+  padding: 15px;
+  color: white;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.judol-hex-container {
+  text-align: left;
+}
+.judol-hex-label {
+  font-size: 16px;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px #000;
+  margin-bottom: 2px;
+  margin-left: 10px;
+}
+.judol-hex-box {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px 25px;
+  border: 3px solid #fff;
+  font-size: 18px;
+  font-weight: bold;
+  text-shadow: 1px 1px 2px #000;
+  white-space: nowrap;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.5), 0 4px 10px rgba(0,0,0,0.5);
+  clip-path: polygon(8% 0, 92% 0, 100% 50%, 92% 100%, 8% 100%, 0 50%);
+}
+.hex-yellow { background: linear-gradient(180deg, #ffca28, #f57f17); border-color: #fff59d; color: #000; text-shadow: none; }
+.hex-red { background: linear-gradient(180deg, #ef5350, #b71c1c); border-color: #ef9a9a; }
+.hex-purple { background: linear-gradient(180deg, #ba68c8, #6a1b9a); border-color: #e1bee7; }
+.hex-green { background: linear-gradient(180deg, #66bb6a, #1b5e20); border-color: #c8e6c9; }
+.hex-icon { font-size: 24px; filter: drop-shadow(1px 1px 1px rgba(0,0,0,0.5)); }
+
+.reels-wrapper {
+  background: #333;
+  border: 4px solid #aaa;
+  padding: 5px;
+  display: flex;
+  gap: 5px;
+  height: 110px;
+  margin: 10px 0;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.6);
+}
+.reel {
+  flex: 1;
+  background: linear-gradient(180deg, #777 0%, #777 20%, #fff 20%, #fff 80%, #777 80%, #777 100%);
+  border: 2px solid #555;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  overflow: hidden;
+  position: relative;
+  box-shadow: inset 0 10px 15px rgba(0,0,0,0.5), inset 0 -10px 15px rgba(0,0,0,0.5);
+}
+.reel-strip {
+  display: flex;
+  flex-direction: column;
+  transition: transform 2s cubic-bezier(0.1, 0.7, 0.1, 1);
+  will-change: transform;
+}
+.reel-symbol {
+  height: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 45px;
+  padding-bottom: 12px;
+  box-sizing: border-box;
+}
+
+@media(max-width: 800px) {
+  .bet-popup-container {
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+  }
+  .bet-popup-container.show {
+    animation: popInMobile 0.2s ease-out;
+  }
+  @keyframes popInMobile {
+    0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
+    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+  }
+}
 
 @media(max-width:600px){
   .fullscreen h1{font-size:52px}

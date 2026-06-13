@@ -11,13 +11,31 @@
 <div id="stage">
 
   <!-- ====== LATAR : SLOT GAMBAR ====== -->
-  <!-- Gambar dimuat otomatis dari assets/images/backgrounds/ (lihat js/render.js).
+  <!-- Gambar dimuat otomatis dari assets/images/backgrounds/ (lihat js/render.js?v=3).
        Kalau file belum ada, label "[ ALT: namafile ]" tetap tampil sbg fallback. -->
-  <div id="bg-slot"><div class="alt-label" id="bg-alt">[ ALT: latar_ruang_tamu.jpg ]</div></div>
+  <div id="bg-slot"><div class="alt-label" id="bg-alt">[ ALT: latar_ruang_tamu.png ]</div></div>
 
-  <!-- ====== KARAKTER : SLOT GAMBAR ====== -->
-  <!-- Gambar dimuat otomatis dari assets/images/characters/ (lihat js/render.js). -->
-  <div id="char-slot"><div class="alt-label" id="char-alt"></div></div>
+  <!-- ====== INTERACTIVE LAYER ====== -->
+  <div id="interactive-layer" style="display:none;">
+    <img src="assets/images/characters/tv_layar1.png" id="img-tv" class="interactive-obj" alt="TV">
+    <div id="hitbox-remote" class="hitbox" title="Ganti Channel TV">
+      <img src="assets/images/characters/remote.png" id="img-remote" class="obj-img" alt="remote">
+    </div>
+    <div id="hitbox-kopi" class="hitbox" title="Minum Kopi">
+      <img src="assets/images/characters/kopi_penuh.png" id="img-kopi" class="obj-img" alt="kopi">
+    </div>
+    <div id="hitbox-pisang" class="hitbox" title="Makan Pisang Goreng">
+      <img src="assets/images/characters/pisang_goreng_penuh.png" id="img-pisang" class="obj-img" alt="pisang">
+      <img src="assets/images/characters/hanya_pisang.png" id="anim-pisang" class="obj-img" style="display:none; position:absolute; top:0; left:0;" alt="pisang anim">
+    </div>
+    <div id="hitbox-hp" class="hitbox" title="Buka HP">
+      <img src="assets/images/characters/hp_asset.png" id="img-hp" class="obj-img" alt="hp">
+    </div>
+  </div>
+
+  <!-- ====== KARAKTER : CONTAINER MULTI SLOT ====== -->
+  <!-- Gambar dimuat otomatis dari assets/images/characters/ (lihat js/render.js?v=3). -->
+  <div id="char-container"></div>
 
   <!-- ====== HUD ====== -->
   <div id="hud">
@@ -86,8 +104,8 @@
 </div>
 
 <!-- Semua JS dipisah ke folder js/ memakai ES Modules.
-     Cukup muat main.js sbg entry point; ia meng-import module lain
+     Cukup muat main.js?v=3 sbg entry point; ia meng-import module lain
      dengan urutan: fsm & render -> dialog/scenes/endings/phone -> tools. -->
-<script type="module" src="js/main.js"></script>
+<script type="module" src="js/main.js?v=3"></script>
 </body>
 </html>
