@@ -29,12 +29,14 @@ body{
 /* ====== STAGE ====== */
 #stage{
   position:relative;
-  width:100%;max-width:900px;
-  aspect-ratio:16/9;
+  width:900px;
+  height:506.25px;
+  flex-shrink:0;
   background:#1b1b20;
   overflow:hidden;
   box-shadow:0 0 60px rgba(0,0,0,.6);
   user-select:none;
+  transform-origin:center center;
 }
 
 /* ====== LATAR (SLOT GAMBAR) ====== */
@@ -557,24 +559,4 @@ body{
   box-sizing: border-box;
 }
 
-@media(max-width: 800px) {
-  .bet-popup-container {
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 80%;
-  }
-  .bet-popup-container.show {
-    animation: popInMobile 0.2s ease-out;
-  }
-  @keyframes popInMobile {
-    0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0; }
-    100% { transform: translate(-50%, -50%) scale(1); opacity: 1; }
-  }
-}
 
-@media(max-width:600px){
-  .fullscreen h1{font-size:52px}
-  #hud{min-width:200px;padding:10px}
-  #kc-bar{width:160px}
-  #phone{width:88%}
-}

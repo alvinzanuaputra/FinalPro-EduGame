@@ -112,5 +112,20 @@ $('hitbox-remote').onclick = () => {
   import('./dialog.js?v=3').then(d => d.cont(['TV', news], 'interactive_loop'));
 };
 
+/* =========================================================
+   RESIZING LOGIC UNTUK RESPONSIVITAS
+   ========================================================= */
+function resizeGame() {
+  const stage = document.getElementById('stage');
+  if (!stage) return;
+  const gameW = 900;
+  const gameH = 506.25;
+  // Hitung rasio layar agar game selalu pas tanpa terpotong
+  const scale = Math.min(window.innerWidth / gameW, window.innerHeight / gameH);
+  stage.style.transform = `scale(${scale})`;
+}
+window.addEventListener('resize', resizeGame);
+resizeGame();
+
 /* render awal */
 render();
