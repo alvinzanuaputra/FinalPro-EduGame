@@ -82,6 +82,3 @@ Proyek ini dibangun menggunakan HTML, CSS murni, dan Vanilla JavaScript (Modular
   - `endings.js`: Mengelola dan mendefinisikan ragam konklusi atau layar akhir (mencakup 6 ending berbeda) berdasarkan rute pilihan pemain.
   - `phone.js`: Menangani logika khusus untuk "Overlay Smartphone", contohnya simulasi percakapan via *chat*, simulasi bermain judol di layar, atau proses pendaftaran aplikasi pinjol fiktif.
   - `tools.js`: Kumpulan *helper* atau utilitas yang mendukung jalannya sistem, termasuk panel debug rahasia untuk memudahkan developer melewati adegan demi keperluan *testing*.
-
-
-  test
